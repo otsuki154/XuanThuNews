@@ -7,7 +7,7 @@ from .sitemap import ArticleSitemap, StaticSitemap,CategorySitemap
 from django.views.generic import TemplateView
 
 sitemaps = {
-    'category':CategorySitemap,
+    # 'category':CategorySitemap,
     'article':ArticleSitemap,
     'static': StaticSitemap,
 }
