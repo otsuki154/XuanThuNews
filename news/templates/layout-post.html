@@ -1,0 +1,21 @@
+{% extends "layout-main.html" %}
+{% load static %}
+{% block main_content %}
+<!--================Blog Area =================-->
+<section class="blog_area single-post-area section-padding" style="padding-top: 60px;">
+    <div class="container">
+        <div class="row aa">
+            <div class="col-lg-8 posts-list">
+                {% block post_content %}
+                
+                {% endblock %}
+            </div>
+
+            <div class="col-lg-4">
+                {% include "elements/sidebar.html" %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Blog Area end =================-->
+{% endblock %}

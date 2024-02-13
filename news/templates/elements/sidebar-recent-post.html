@@ -1,0 +1,16 @@
+{% load static %}
+<aside class="single_sidebar_widget popular_post_widget">
+    <h3 class="widget_title">Bài Viết Gần Đây</h3>
+    {% for item in items_feed_sidebar_recent %}
+        <div class="media post_item">
+            <img src="{{ item.image.url }}" alt="{{item.name}}"
+                style="width: 30%;">
+            <div class="media-body">
+                <a href="{{ item.get_absolute_url }}">
+                    <h3>{{item.name}}</h3>
+                </a>
+                <p></p>
+            </div>
+        </div>
+    {% endfor %}
+</aside>

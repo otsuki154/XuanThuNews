@@ -1,0 +1,27 @@
+{% load static %}
+{% load humanize %}
+{%if items_price_sidebar_gold|length > 0 %}
+    <aside class="single_sidebar_widget post_category_widget">
+        <h4 class="widget_title mb-2" style="margin-bottom: 0 !important;">Giá Vàng</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Loại vàng</th>
+                    <th scope="col">Mua</th>
+                    <th scope="col">Bán</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in  items_price_sidebar_gold%}
+                    <tr>
+                        <td>{{item.type}}</td>
+                        <td>{{item.buy|floatformat:3|intcomma}}</td>
+                        <td>{{item.sell|floatformat:3|intcomma}}</td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </aside>
+{% endif %}

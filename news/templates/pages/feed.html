@@ -1,0 +1,51 @@
+{% extends "layout-nosidebar.html" %}
+{% load static %}
+{% block content %}
+<div class="whats-news-wrapper">
+    <!-- Heading & Nav Button -->
+    <div class="row justify-content-between align-items-end mb-15">
+        <div class="col-12">
+            <div class="section-tittle mb-30 ml-2">
+                <h3>{{item_feed.name}}</h3>
+            </div>
+        </div>
+    </div>
+    <!-- Tab content -->
+    <div class="row">
+        <div class="col-12">
+            <!-- Nav Card -->
+            <div class="tab-content" id="nav-tabContent">
+                <!-- card one -->
+                <div class="tab-pane fade show active" id="nav-news" role="tabpanel"
+                    aria-labelledby="nav-news-tab">
+                    <div class="row">
+                        {% if items_feed|length > 0%}
+                            {% for item in items_feed %}
+                                <div class="col-xl-4 col-lg-4 col-md-4">
+                                    <div class="whats-news-single mb-40 mb-40">
+                                        <div class="whates-img" style="height: 200px;">
+                                            <img src="{{item.img}}" style="height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div class="whates-caption whates-caption2">
+
+                                            <h4><a href="{{item.link}}"
+                                                    target="_blank">{{item.title}}</a></h4>
+                                            <span>{{item.publish_date}}</span>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Xuân Thu không lấy được dữ liệu bài viết...</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Nav Card -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

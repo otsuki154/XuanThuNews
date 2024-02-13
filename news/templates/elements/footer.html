@@ -1,0 +1,80 @@
+{% load static %}
+
+<!-- Footer Start-->
+
+<div class="footer-main footer-bg">
+    <div class="footer-area footer-padding">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-8">
+                    <div class="single-footer-caption mb-50">
+                        <div class="single-footer-caption mb-30">
+                            <!-- logo -->
+                            <div class="footer-logo">
+                                <a href="/"><img src={{img_src}} alt=""></a>
+                            </div>
+                            <div class="footer-tittle">
+                                <div class="footer-pera">
+                                    
+                                    <p class="info1 mb-3">Báo tin tức Xuân Thu</p>
+                                    <p class="info1 mb-3">Đa dạng và Phong Phú, Nhanh Chóng và Tiện Lợi</p>
+                                    <li class="info2 mb-3"><a href="{% url 'about' %}">Giới Thiệu</a></li>
+                                    {% comment %} <li class="info2 mb-3"><a href="{% url 'contact' %}">Liên Hệ</a></li> {% endcomment %}
+                                    <li class="info2 mb-3"><a href="{% url 'policy' %}">Điều khoản sử dụng</a></li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-7">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>Bài Viết Ngẫu Nhiên</h4>
+                        </div>
+                        {% for item in items_feed_sidebar_random %}
+                            <!-- Popular post -->
+                            <div class="whats-right-single mb-20">
+                                <div class="whats-right-img" style="width: 30%;">
+                                    <img src="{{ item.image.url }}"
+                                        alt="{{item.name}}" style="width: 100%;">
+                                </div>
+                                <div class="whats-right-cap" style="width: 70%;">
+                                    <h4><a href="{{ item.get_absolute_url }}">{{item.name}}</a></h4>
+                                    <p>{{item.publish_date | date:"M d Y"}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-7">
+                    <div class="single-footer-caption mb-50">
+                        <div class="banner">
+                            <img src={{footer_img_src}} alt="" style="width: 87%;">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer-bottom aera -->
+    <div class="footer-bottom-area footer-bg">
+        <div class="container">
+            <div class="footer-border">
+                <div class="row d-flex align-items-center">
+                    <div class="col-xl-12 ">
+                        <div class="footer-copy-right text-center">
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End-->

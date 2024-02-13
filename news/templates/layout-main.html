@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+{% include "elements/head.html" %}
+</head>
+
+<body>
+    <!-- Preloader Start -->
+    {% comment %} <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src={{logo_image}}  alt="">
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    <!-- Preloader Start -->
+    <header>
+        {% comment %} {% include "elements/header.html" %} {% endcomment %}
+        {% include "elements/header-horizon.html" %}
+    </header>
+    <main>
+        {% block main_content %}
+  
+        {% endblock %}
+    </main>
+    <footer>
+        {% include "elements/footer.html" %}
+    </footer>
+    <!-- Search model Begin -->
+        {% include "elements/search.html" %}    
+    <!-- Search model end -->
+
+    <!-- JS here -->
+    {% include "elements/scripts.html" %}
+</body>
+
+</html>
