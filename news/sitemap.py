@@ -40,5 +40,5 @@ class CategorySitemap(Sitemap):
     def location(self, obj):
         return obj.get_absolute_url
 
-    def lastmod(self, obj): 
-        return obj.updated_at 
+    # def lastmod(self, obj): 
+    #     return obj.slug 

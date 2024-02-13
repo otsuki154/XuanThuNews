@@ -8,8 +8,8 @@ from django.views.generic import TemplateView
 
 sitemaps = {
     'category':CategorySitemap,
-    # 'article':ArticleSitemap,
-    # 'static': StaticSitemap,
+    'article':ArticleSitemap,
+    'static': StaticSitemap,
 }
 
 urlpatterns = [
