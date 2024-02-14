@@ -201,19 +201,20 @@ active phía client: 10 người dùng => gửi yêu cầu => html, css, js => a
 
 1. Install postgresql
    - đặt lại mật khẩu cho user postgres là postgres
-     > psql -U postgres -p 5432 -h localhost -d djangodb
-     > create database djangodb owner postgres;
+     > psql -U postgres -p 5432 -h localhost -d xuanthudb
+     > create database xuanthudb owner postgres;
 2. Cài đặt python và môi trường ảo (nếu đã installed thì không cần)
    > sudo apt install python3 python3-venv 
 3. Di chuyển đến folder dự án và tạo và kích hoạt môi trường ảo  
-   cd code-server/config/PythonProject/DjangoWeb  
+   cd ~/XuanThuNews/XuanThuNews 
    python3 -m venv venv  
    source venv/bin/activate  
+   source xuanthu/bin/activate  
 4. Tạo file requirements.txt có nội dung(chưa các thư viện cần cài đặt để chạy được dự án)  
    - cài thư viện với lệnh
       pip install -r requirements.txt
 5. Collect Static Files
-   -Sửa file setting.py với nội dung tương ứng bên dưới  
+   - Sửa file setting.py với nội dung tương ứng bên dưới  
 ```
 STATIC_URL = '/static/'
 
@@ -236,87 +237,88 @@ MEDIA_URL = '/media/' #quy định các file media(image, audio, video...) bắt
 - Nếu bị lỗi thì thêm allow host và setting.py  
    ALLOWED_HOSTS = ['192.168.0.228', 'yourdomain.com']
 8. Test Gunicorn
-gunicorn --bind 0.0.0.0:8585 DjangoWeb.wsgi
-deactivate
+- gunicorn --bind 0.0.0.0:8585 DjangoWeb.wsgi
+- deactivate
 9. Creating systemd Socket and Service Files for Gunicorn
-- sudo nano /etc/systemd/system/gunicorn.socket  
-Nội dung
+- sudo nano /etc/systemd/system/xuanthu.socket  
+Nội dung  
 ```
 [Unit]
-Description=gunicorn socket
+Description=xuanthu socket
 
 [Socket]
-ListenStream=/run/gunicorn.sock
+ListenStream=/run/xuanthu.sock
 
 [Install]
 WantedBy=sockets.target
 ```
-- sudo nano /etc/systemd/system/gunicorn.service
+- sudo nano /etc/systemd/system/xuanthu.service  
 Nội dung  
 ```
 [Unit]
-Description=gunicorn daemon
-Requires=gunicorn.socket
+Description=xuanthu daemon
+Requires=xuanthu.socket
 After=network.target
 
 [Service]
 User=thanh
 Group=www-data
-WorkingDirectory=/news/thanh/code-server/config/PythonProject/DjangoWeb
-ExecStart=/news/thanh/code-server/config/PythonProject/DjangoWeb/venv/bin/gunicorn \
-          --access-logfile - \
-          --workers 3 \
-          --bind unix:/run/gunicorn.sock \
-          DjangoWeb.wsgi:application
+WorkingDirectory=/home/thanh/XuanThuNews/XuanThuNews
+ExecStart=/home/thanh/XuanThuNews/XuanThuNews/xuanthu/bin/gunicorn \
+         --access-logfile - \
+         --workers 3 \
+         --bind unix:/run/gunicorn.sock \
+         DjangoWeb.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-sudo systemctl restart gunicorn.socket
-sudo systemctl enable gunicorn.socket
-sudo systemctl status gunicorn.socket
-file /run/gunicorn.sock
-sudo systemctl status gunicorn
-curl --unix-socket /run/gunicorn.sock localhost
-sudo systemctl status gunicorn
+sudo systemctl restart xuanthu.socket
+sudo systemctl enable xuanthu.socket
+sudo systemctl status xuanthu.socket
+file /run/xuanthu.sock
+sudo systemctl status xuanthu
+curl --unix-socket /run/xuanthu.sock localhost
+sudo systemctl status xuanthu
 
 
-- Khi update code thi restart lai gunicorn va Nginx
-pkill gunicorn
-gunicorn DjangoWeb.wsgi:application
+- Khi update code thi restart lai xuanthu va Nginx
 
 10. Configure Nginx to Proxy Pass to Gunicorn
-sudo nano /etc/nginx/sites-available/DjangoWeb
+sudo nano /etc/nginx/sites-available/XuanThuNews
+
 Nội dung  
 ```
 server {
     listen 80;
-    server_name news.nvthanh.online;
+    server_name test.nvthanh.online;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /news/thanh/code-server/config/PythonProject/DjangoWeb;
+        root /home/thanh/XuanThuNews/XuanThuNews;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/run/gunicorn.sock;
+        proxy_pass http://unix:/run/xuanthu.sock;
     }
 }
 ```
-sudo ln -s /etc/nginx/sites-available/DjangoWeb /etc/nginx/sites-enabled
+
+sudo ln -s /etc/nginx/sites-available/XuanThuNews /etc/nginx/sites-enabled
 sudo nginx -t
 sudo systemctl restart nginx
 
 sudo ufw allow 'Nginx Full'
 
 11. Git command  
- git pull https://github.com/otsuki154/PythonProject.git master  
+ git pull https://github.com/otsuki154/XuanThuNews.git master  
  git status   
  git add .  
  git commit -m ""  
  git push origin master 
+
 - Password khi push trên Ubuntu server(nếu không được thì lên github gen lại key)  
 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
 
@@ -325,21 +327,9 @@ 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
 - python3 manage.py makemigrations news
 - python3 manage.py migrate
 
-- Client - Khách Truy Cập
-- Admin - Phía Quản Lý
+- psql -U postgres -p 5432 -h localhost -d xuanthudb
 
+- sudo systemctl restart gunicorn.socket
+- sudo systemctl restart gunicorn.service
+- sudo systemctl restart nginx
 
-psql -U postgres -p 5432 -h localhost -d djangodb
-
-cd code-server/config/PythonProject/DjangoWeb 
-source venv/bin/activate 
-python3 manage.py runserver 192.168.0.228:8585 
-
-
-sudo systemctl restart gunicorn.socket
-sudo systemctl restart gunicorn.service
-sudo systemctl restart nginx
-
-# nhớ thêm unique cho table
-ALTER TABLE public.news_article
-ADD CONSTRAINT unique_name_slug_constraint UNIQUE (name, slug);
