@@ -167,6 +167,7 @@ SITE_ID = 1
 # Cấu hình TinyMCE
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': 'image',
+    'plugins': 'preview',
     'height': 1400, 
     'width': 900, 
     # Các cấu hình khác...
