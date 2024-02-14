@@ -161,3 +161,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #The SITE_ID variable is essential when using multiple websites on a single database.
 SITE_ID = 1
+
+# Cấu hình TinyMCE
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': 'image',
+    'height': 1400, 
+    'width': 900, 
+    # Các cấu hình khác...
+}
