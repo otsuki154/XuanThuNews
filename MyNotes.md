@@ -323,6 +323,7 @@ sudo ufw allow 'Nginx Full'
 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
 
 # Các câu lệnh thường dùng
+- source xuanthu/bin/activate  
 - python3 manage.py runserver
 - python3 manage.py makemigrations news
 - python3 manage.py migrate
