@@ -4,7 +4,7 @@ from .define import *
 from .helpers import *
 from django.db.models import Count
 import requests
-import json
+from datetime import datetime
 from django_user_agents.utils import get_user_agent
 
 
@@ -23,7 +23,16 @@ def items_category_sidebar_menu(request):
 
 def items_feed_sidebar_menu(request):
     items_feed_sidebar_menu = Feed.objects.filter(status=APP_VALUE_STATUS_ACTIVE_DEFINE ).order_by("ordering")[:APP_VALUE_FEED_NUM_MENU_SIDEBAR_DEFINE]
-    return {"items_feed_sidebar_menu":items_feed_sidebar_menu}
+    # Lấy thời gian hiện tại
+    today = datetime.now()
+
+    # Chuyển định dạng thời gian
+    today = today.strftime("%A, %d/%m/%Y")
+
+    return {"items_feed_sidebar_menu":items_feed_sidebar_menu,
+            "today":today
+            }
+
 
 
 
