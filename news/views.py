@@ -32,7 +32,8 @@ def category(request,category_slug):
     #lấy thông tin catarory
     item_category = get_object_or_404(Category, slug=category_slug, status=APP_VALUE_STATUS_ACTIVE_DEFINE )
     #lấy article thuộc catarory
-    items_article = Article.objects.filter(category=item_category, status=APP_VALUE_STATUS_ACTIVE_DEFINE , publish_date__lte = timezone.now()).order_by("-publish_date")
+    items_article = Article.objects.filter(category=item_category, status=APP_VALUE_STATUS_ACTIVE_DEFINE, publish_date__lte=timezone.now()).order_by("-publish_date")[:120]
+
 
     #phân trang
     paginator = Paginator(items_article, APP_VALUE_ARTICAL_NUM_IN_PAGE_DEFINE)
