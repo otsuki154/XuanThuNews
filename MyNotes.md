@@ -274,13 +274,13 @@ ExecStart=/home/thanh/XuanThuNews/XuanThuNews/xuanthu/bin/gunicorn \
 WantedBy=multi-user.target
 ```
 
-sudo systemctl restart xuanthu.socket
-sudo systemctl enable xuanthu.socket
-sudo systemctl status xuanthu.socket
-file /run/xuanthu.sock
-sudo systemctl status xuanthu
-curl --unix-socket /run/xuanthu.sock localhost
-sudo systemctl status xuanthu
+sudo systemctl restart xuanthu.socket   
+sudo systemctl enable xuanthu.socket   
+sudo systemctl status xuanthu.socket   
+file /run/xuanthu.sock   
+sudo systemctl status xuanthu   
+curl --unix-socket /run/xuanthu.sock localhost   
+sudo systemctl status xuanthu   
 
 
 - Khi update code thi restart lai xuanthu va Nginx
