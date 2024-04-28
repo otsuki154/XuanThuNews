@@ -26,8 +26,8 @@
 - Link Document 4.2: https://docs.djangoproject.com/en/4.2/
 - Xem version Django: django-admin startproject mysite
 - Tạo project mới: django-admin startproject mysite
-- Chạy server: python manage.py runserver
-- Đổi port: python manage.py runserver 6969
+- Chạy server: python3 manage.py runserver
+- Đổi port: python3 manage.py runserver 6969
 - Tạo app mới: python manage.py startapp polls
 - Tạo mới, áp dụng sự thay đổi cho cơ sở dữ liệu: python manage.py migrate
 - Tạo user mới: python manage.py createsuperuser
@@ -330,7 +330,7 @@ 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
 
 - psql -U postgres -p 5432 -h localhost -d xuanthudb
 
-- sudo systemctl restart gunicorn.socket
-- sudo systemctl restart gunicorn.service
+- sudo systemctl restart xuanthu.socket
+- sudo systemctl restart xuanthu.service
 - sudo systemctl restart nginx
 
